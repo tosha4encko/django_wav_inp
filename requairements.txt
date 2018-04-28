@@ -3,3 +3,4 @@ scipy
 numpy
 python_speech_features
 sklearn
+eyeD3

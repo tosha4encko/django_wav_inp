@@ -8,23 +8,45 @@ from python_speech_features import mfcc
 from sklearn.externals import joblib
 from .models import WavIO
 import json
+import eyed3
 
 class CreateDataAu:
     def __init__(self, file):
         self.file = file
-        self.res_dir = 'wav_io/file/tmp/' + self.file.name
-        _, file_extension = os.path.splitext(self.file.name)
+        self.res_dir = 'wav_io/file/tmp/' + self.file.name + ''
         self.wav_list = []
-
-        if (file_extension != '.wav' and file_extension != '.mp3'):
+        self.is_save = False
+        file_name, file_extension = os.path.splitext(self.file.name)
+        if file_extension != '.wav' and file_extension != '.mp3':
             print(file_extension + '!')
+            self.is_save = False
         else:
             with open(self.res_dir, 'wb+') as destination:
                 for chunk in self.file.chunks():
                     destination.write(chunk)
-            self.is_save = True
+            if file_extension == '.mp3':
+                self.parse_metadata()
+                self.convert_to_wav(file_name)
 
-    clust_dir = 'wav_io/file/clust/kmeans_clust.pkl'
+            self.is_save = True
+            self.create_data()
+
+    def parse_metadata(self):
+        au = eyed3.load(self.res_dir)
+        self.artist = au.tag.artist
+        self.albom  = au.tag.album
+        self.title   = au.tag.title
+
+
+    def convert_to_wav(self, file_name):
+        com = 'sox ' +'wav_io/file/tmp/"' + file_name + '.mp3" -c 1 -t wav -r 8k ' + 'wav_io/file/tmp/"' + file_name + '.wav" remix -'
+        # com = 'mpg123 -w ' + '"wav_io/file/tmp/' + file_name + '.wav" "' + 'wav_io/file/tmp/30_' + file_name + '.mp3"'
+        print(com)
+        print(os.system(com))
+        os.remove('wav_io/file/tmp/' + file_name + '.mp3')
+        self.res_dir = 'wav_io/file/tmp/' + file_name + '.wav'
+
+    clust_dir = 'wav_io/file/models/kmeans_clust.pkl'
     def create_data(self):
         if self.is_save:
             (rate, sig) = wav.read(self.res_dir)
