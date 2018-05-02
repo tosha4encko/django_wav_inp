@@ -1,0 +1,35 @@
+<html>
+    <!doctype html>
+{% load staticfiles %}
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <title>test-wav</title>
+        <meta name="yandex-verification" content="53bc61c7ec40e932" />
+        <link rel="stylesheet" href="{% static 'main.css' %}" type="text/css"/>
+    </head>
+    <body>
+        <p><a href = "/wav_io/">Search</a></p>
+
+        <div class="metadata">
+            <h3> Metadata:</h3>
+            <p>Artist: {{artist}}</p>
+            <p>Albom: {{albom}}</p>
+            <p>Title: {{title}}</p>
+            <h3> Tags: </h3>
+            {% for k, v in tag.items %}
+                {% if v %}
+                    <p>{{k}}: {{v}} %</p>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class = list_recomend>
+            <h3> Recomendations:</h3>
+            {% for wav in wav_list %}
+               <p><a href = "/{{wav.id}}/">{{ wav.name }}</a></p>
+            {% endfor %}
+        </div>
+    </body>
+</html>
+
+

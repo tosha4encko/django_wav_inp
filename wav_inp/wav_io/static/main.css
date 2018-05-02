@@ -4,10 +4,43 @@ body {
 }
 
 form {
-    padding: 200 0 0 400;
+    position: absolute;
+    width: 250px;
+    left: 450;
+    top: 100;
+}
+
+p
+{
+    text-indent: 5px;
 }
 
 .list_obj
 {
-    padding: 0 0 0 420;
+    padding: 0 10 0 10;
+    border: 4px double black;
+    position: absolute;
+    width: 310px;
+    left: 400;
+    top: 180;
+}
+
+.list_recomend
+{
+    padding: 0 10 0 10;
+    border: 4px double black;
+    position: absolute;
+    width: 200px;
+    left: 600;
+    top: 150;
+}
+
+.metadata
+{
+    padding: 0 10 0 10;
+    border: 4px double black;
+    position: absolute;
+    width: 300px;
+    left: 200;
+    top: 150;
 }

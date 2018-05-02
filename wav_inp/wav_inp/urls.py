@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from wav_io.views import upload_file
+from wav_io.views import upload_file, object
 from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url('^(?P<au_id>[0-9]+)/', object),
     url('^wav_io/', upload_file),
 ]
 

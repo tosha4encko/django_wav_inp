@@ -7,7 +7,6 @@
         <title>test-wav</title>
         <meta name="yandex-verification" content="53bc61c7ec40e932" />
         <link rel="stylesheet" href="{% static 'main.css' %}" type="text/css"/>
-        <link rel="shortcut icon" href="{% media images/ball.jpeg}">
     </head>
     <body>
         <form action="/wav_io/" method="post" enctype="multipart/form-data">
@@ -15,18 +14,11 @@
             {{ form }}
             <input type="submit" value="Submit" />
         </form>
-        <div>
-            <p>{{artist}}</p>
-            <p>{{albom}}</p>
-            <p>{{title}}</p>
-            <p>{{tag}}</p>
+        <div class = list_obj>
+            <h3> Random compositions: </h3>
+            {% for wav in wav_list %}
+               <p><a href = "/{{wav.id}}/">{{ wav.name }}</a></p>
+            {% endfor %}
         </div>
-        <!--<div class = list_obj>-->
-            <!--{% for wav in wav_list %}-->
-                <!--<p>{{ wav.name }}</p>-->
-            <!--{% endfor %}-->
-        <!--</div>-->
     </body>
 </html>
-
-

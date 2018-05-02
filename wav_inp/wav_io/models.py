@@ -5,7 +5,9 @@ class WavIO(models.Model):
     albom = models.CharField(max_length=100)
     artist = models.CharField(max_length=100)
 
-    tag = models.IntegerField(blank=True)
     data = models.CharField(max_length=3000, blank=True)
+    ftag = models.CharField(max_length=3000, blank=True)
+
+    clust = models.IntegerField(blank=True)
     dist = models.IntegerField(blank=True)
     yandex_au_url = models.CharField(max_length=3000, blank=True)
