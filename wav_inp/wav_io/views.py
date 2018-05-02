@@ -1,10 +1,9 @@
-from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from .forms import UploadFileForm
 from .au_data1 import CreateDataAu
 from .models import WavIO
 import json
-
+import numpy as np
 def upload_file(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
@@ -15,7 +14,8 @@ def upload_file(request):
     else:
         form = UploadFileForm()
     print(type(WavIO.objects.all()))
-    return render(request, 'search.html', {'form': form, 'wav_list': WavIO.objects.all()[:10]})
+    return render(request, 'search.html', {'form': form,
+                                           'wav_list': WavIO.objects.all()[:10]})
 
 def object(request, au_id):
     obj = get_object_or_404(WavIO, pk=au_id)
